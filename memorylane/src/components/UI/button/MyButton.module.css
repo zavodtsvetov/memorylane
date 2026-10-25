@@ -1,0 +1,15 @@
+.myButton {
+  padding: 5px 20px;
+  background-color: teal;
+  font-size: 14px;
+  border: 2px solid teal;
+  cursor: pointer;
+}
+.myButton:hover {
+  padding: 5px 20px;
+  background-color: rgb(255, 99, 8);
+  color: white;
+  font-size: 14px;
+  border: 2px solid rgb(255, 95, 50);
+  cursor: pointer;
+}
