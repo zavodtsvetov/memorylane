@@ -19,7 +19,10 @@ function App() {
   const removePost = (postToDelete) => {
     setPosts(posts.filter((post) => post.id !== postToDelete.id));
   };
-
+  const sortPosts = (sort) => {
+    setSelectedSort(sort);
+    setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])));
+  };
   return (
     <>
       <div className="app">
@@ -32,6 +35,8 @@ function App() {
         <PostForm create={createPost} />
         <hr style={{ width: "300px", marginBottom: "20px" }} />
         <MySelect
+          value={selectedSort}
+          onChange={sortPosts}
           defaultValue={"Сортировать"}
           options={[
             { value: "title", name: "По названию" },
