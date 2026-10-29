@@ -1,52 +1,50 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import "./styles/App.css";
 import PostList from "./components/PostList";
 import PostForm from "./components/forms/PostForm";
-import MySelect from "./components/UI/select/MySelect";
-import MyInput from "./components/UI/input/MyInput";
+import PostFilter from "./components/PostFilter/PostFilter";
+import MyModal from "./components/MyModal/MyModal";
+import MyButton from "./components/UI/button/MyButton";
+import "./styles/App.css";
+import { usePosts } from "./hooks/usePosts";
 function App() {
   const [posts, setPosts] = useState([
     { id: 1, title: "JS", body: "ffebout js" },
     { id: 2, title: "GO", body: "nnbout golang" },
     { id: 3, title: "Py", body: "about python" },
   ]);
-  const [selectedSort, setSelectedSort] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
-
+  const [filter, setFilter] = useState({
+    sort: "",
+    query: "",
+  });
+  const [modal, setModal] = useState(false);
+  const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
+    setModal(false);
   };
+
   const removePost = (postToDelete) => {
     setPosts(posts.filter((post) => post.id !== postToDelete.id));
   };
-  const sortPosts = (sort) => {
-    setSelectedSort(sort);
-    setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])));
-  };
+
   return (
     <>
       <div className="app">
-        <MyInput
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          style={{ width: "300px", marginLeft: "20px" }}
-          placeholder="Поиск"
-        />
-        <PostForm create={createPost} />
-        <hr style={{ width: "300px", marginBottom: "20px" }} />
-        <MySelect
-          value={selectedSort}
-          onChange={sortPosts}
-          defaultValue={"Сортировать"}
-          options={[
-            { value: "title", name: "По названию" },
-            { value: "body", name: "По описанию" },
-          ]}
-        />
+        <MyButton style={{ marginTop: "30px" }} onClick={() => setModal(true)}>
+          Добавить новый пост
+        </MyButton>
+        <MyModal visible={modal} setVisible={setModal}>
+          <PostForm create={createPost} />
+        </MyModal>
+
+        <PostFilter filter={filter} setFilter={setFilter} />
         <PostList
           remove={removePost}
-          posts={posts}
-          title={posts.length ? "Посты про js" : "Постов нет. Добавьте их!"}
+          posts={sortedAndSearchedPosts}
+          title={"Посты про js"}
+          visible={modal}
+          setVisible={setModal}
         />
       </div>
     </>
