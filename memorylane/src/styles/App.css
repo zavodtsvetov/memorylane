@@ -18,3 +18,23 @@
   border: 2px solid teal;
   align-items: center;
 }
+
+.page__wrapper {
+  display: flex;
+  justify-content: left;
+}
+
+.page {
+  background-color: teal;
+  color: whitesmoke;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  &:hover {
+    background-color: rgb(0, 79, 79);
+  }
+}
+
+.page__current {
+  border: 5px solid orange;
+}

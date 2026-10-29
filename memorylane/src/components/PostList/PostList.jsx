@@ -1,6 +1,6 @@
-import "../styles/App.css";
+import "../../styles/App.css";
 import { motion } from "motion/react";
-import PostItem from "./PostItem";
+import PostItem from "../PostItem/PostItem";
 import { AnimatePresence } from "motion/react";
 
 const PostList = ({ posts, title, remove, visible, setVisible }) => {
