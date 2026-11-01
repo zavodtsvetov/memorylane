@@ -5,7 +5,8 @@
 }
 #root {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 .app {
   width: 800px;
@@ -37,4 +38,21 @@
 
 .page__current {
   border: 5px solid orange;
+}
+
+.navbar {
+  width: 100vw;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  background-color: rgb(206, 206, 206);
+}
+.navbar__links {
+  margin-left: auto;
+}
+
+.post__btns {
+  display: flex;
+  justify-content: space-around;
 }

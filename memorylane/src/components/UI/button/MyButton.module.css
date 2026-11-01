@@ -4,6 +4,7 @@
   font-size: 14px;
   border: 2px solid teal;
   cursor: pointer;
+  margin: 0 3px 0 3px;
 }
 .myButton:hover {
   padding: 5px 20px;
